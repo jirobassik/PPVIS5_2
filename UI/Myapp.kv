@@ -1,0 +1,73 @@
+MDScreen :
+    md_bg_color : [255/255,255/255,255/255,1]
+    MDCard :
+        size_hint : None,None
+        size : 320,500
+        pos_hint : {"center_x":.5,"center_y":.5}
+        elevation : 3
+        md_bg_color : [255/255,255/255,255/255,1]
+        padding : 15
+        spacing : 15
+        orientation : "vertical"
+        # Adding items to the card
+        MDLabel :
+            text : 'Sign in'
+            #font_style : 'Button'
+            font_size : 25
+            halign : "left"
+            size_hint_y : None
+            mode: "rectangle"
+            height : self.texture_size[1]
+            padding_y : 5
+        MDTextField:
+            hint_text : "Email"
+            size_hint_x : 1.03
+            width : 220
+            font_size : 10
+            mode: "rectangle"
+            color_active : [1,1,1,1]
+        MDTextField:
+            hint_text : "Password"
+            size_hint_x : 1.03
+            width : 220
+            font_size : 10
+            mode: "rectangle"
+            color_active : [1,1,1,1]
+        MDTextField:
+            hint_text : "Login"
+            size_hint_x : 1.03
+            width : 220
+            font_size : 10
+            mode: "rectangle"
+            color_active : [1,1,1,1]
+        MDTextField:
+            hint_text : "Name"
+            size_hint_x : 1.03
+            width : 220
+            font_size : 10
+            mode: "rectangle"
+            color_active : [1,1,1,1]
+            password : True
+        MDLabel :
+            text : 'Forgot password?'
+            font_size : 10
+            halign : "center"
+            size_hint_y : None
+            color: "blue"
+            underline: True
+            mode: "rectangle"
+            height : self.texture_size[1]
+            padding_y : 1
+        MDRaisedButton:
+            text : 'Sign in'
+            pos_hint : {"center_x":.5}
+            md_bg_color: "grey"
+            size_hint: 0.6, None
+        MDRaisedButton:
+            text: "Create new account"
+            pos_hint : {"center_x":.5}
+            md_bg_color: "grey"
+            size_hint: 0.6, None
+        Widget :
+            size_hint_y : None
+            height : 5
