@@ -1,73 +1,268 @@
-MDScreen :
-    md_bg_color : [255/255,255/255,255/255,1]
-    MDCard :
-        size_hint : None,None
-        size : 320,500
-        pos_hint : {"center_x":.5,"center_y":.5}
-        elevation : 3
+ScreenManager:
+    RegScreen:
+    ProfileScreen:
+    SettingScreen:
+    ChangepassScreen:
+    ViewCreateTestScreen:
+
+<RegScreen>:
+    name: 'reg'
+    MDScreen :
         md_bg_color : [255/255,255/255,255/255,1]
-        padding : 15
-        spacing : 15
-        orientation : "vertical"
-        # Adding items to the card
-        MDLabel :
-            text : 'Sign in'
-            #font_style : 'Button'
-            font_size : 25
-            halign : "left"
-            size_hint_y : None
-            mode: "rectangle"
-            height : self.texture_size[1]
-            padding_y : 5
-        MDTextField:
-            hint_text : "Email"
-            size_hint_x : 1.03
-            width : 220
-            font_size : 10
-            mode: "rectangle"
-            color_active : [1,1,1,1]
-        MDTextField:
-            hint_text : "Password"
-            size_hint_x : 1.03
-            width : 220
-            font_size : 10
-            mode: "rectangle"
-            color_active : [1,1,1,1]
-        MDTextField:
-            hint_text : "Login"
-            size_hint_x : 1.03
-            width : 220
-            font_size : 10
-            mode: "rectangle"
-            color_active : [1,1,1,1]
-        MDTextField:
-            hint_text : "Name"
-            size_hint_x : 1.03
-            width : 220
-            font_size : 10
-            mode: "rectangle"
-            color_active : [1,1,1,1]
-            password : True
-        MDLabel :
-            text : 'Forgot password?'
-            font_size : 10
-            halign : "center"
-            size_hint_y : None
-            color: "blue"
-            underline: True
-            mode: "rectangle"
-            height : self.texture_size[1]
-            padding_y : 1
-        MDRaisedButton:
-            text : 'Sign in'
-            pos_hint : {"center_x":.5}
-            md_bg_color: "grey"
-            size_hint: 0.6, None
-        MDRaisedButton:
-            text: "Create new account"
-            pos_hint : {"center_x":.5}
-            md_bg_color: "grey"
-            size_hint: 0.6, None
-        Widget :
-            size_hint_y : None
-            height : 5
+        MDCard :
+            size_hint : None,None
+            size : 320,500
+            pos_hint : {"center_x":.5,"center_y":.5}
+            elevation : 3
+            md_bg_color : [255/255,255/255,255/255,1]
+            padding : 15
+            spacing : 15
+            orientation : "vertical"
+            # Adding items to the card
+            MDLabel :
+                text : 'Sign in'
+                font_size : 25
+                halign : "left"
+                size_hint_y : None
+                mode: "rectangle"
+                height : self.texture_size[1]
+                padding_y : 5
+            MDTextField:
+                hint_text : "Email"
+                size_hint_x : 1.03
+                width : 220
+                font_size : 10
+                mode: "rectangle"
+                color_active : [1,1,1,1]
+            MDTextField:
+                hint_text : "Password"
+                size_hint_x : 1.03
+                width : 220
+                font_size : 10
+                mode: "rectangle"
+                color_active : [1,1,1,1]
+            MDTextField:
+                hint_text : "Login"
+                size_hint_x : 1.03
+                width : 220
+                font_size : 10
+                mode: "rectangle"
+                color_active : [1,1,1,1]
+            MDTextField:
+                hint_text : "Name"
+                size_hint_x : 1.03
+                width : 220
+                font_size : 10
+                mode: "rectangle"
+                color_active : [1,1,1,1]
+                password : True
+            MDLabel :
+                text : 'Forgot password?'
+                font_size : 10
+                halign : "center"
+                size_hint_y : None
+                color: "blue"
+                underline: True
+                mode: "rectangle"
+                height : self.texture_size[1]
+                padding_y : 1
+            MDRaisedButton:
+                text : 'Sign in'
+                pos_hint : {"center_x":.5}
+                md_bg_color: "grey"
+                size_hint: 0.6, None
+                on_press: root.manager.current = 'profile'
+            MDRaisedButton:
+                text: "Create new account"
+                pos_hint : {"center_x":.5}
+                md_bg_color: "grey"
+                size_hint: 0.6, None
+                on_press: root.manager.current = 'profile'
+            Widget :
+                size_hint_y : None
+                height : 5
+
+<ProfileScreen>:
+    name: 'profile'
+    MDIconButton:
+        icon: "cog"
+        icon_size: "45sp"
+        pos_hint: {"x": 0.79, 'y': 0.89}
+        on_press: root.manager.current = 'settings'
+    MDLabel:
+        id: label_add1
+        text: "Name: igor\n\n Email: igor@mail.ru\n\n Login: lubaxa\n\n ID: 45895 \n\n Number create tests: 0 \n Number pass tests: 0"
+        halign: 'left'
+        valign: 'bottom'
+        color: 95/255.0, 99/255.0, 82/255.0, 1
+        size_hint: 0.9, 0.4
+        pos_hint: {"x": 0.045, 'y': 0.5}
+        background_color: (157/255.0, 160/255.0, 149/255.0, 0.8)
+        canvas.before:
+            Color:
+                rgba: self.background_color
+            Rectangle:
+                size: self.size
+                pos: self.pos
+    MDRaisedButton:
+        text : 'Sign out'
+        pos_hint: {"x": 0.19, 'y': 0.35}
+        md_bg_color: "grey"
+        size_hint: 0.6, None
+        on_press: root.manager.current = 'profile'
+    MDBoxLayout:
+        adaptive_size: True
+        pos_hint: {'center_x':0.5,'center_y':0.1}
+        MDIconButton:
+            icon: "account"
+            disabled: True
+        MDIconButton:
+            icon: "file-document"
+        MDIconButton:
+            icon: "folder"
+            on_press: root.manager.current = 'create_tests'
+        MDIconButton:
+            icon: "account-plus"
+
+
+<SettingScreen>:
+    name: 'settings'
+    MDIconButton:
+        icon: 'arrow-left'
+        icon_size: "45sp"
+        pos_hint: {"x": 0.001, 'y': 0.89}
+        on_press: root.manager.current = 'profile'
+    MDDropDownItem:
+        id: dropdown_item
+        pos_hint: {"x": 0.1, 'y': 0.80}
+        size_hint: 0.7, None
+        text: 'English'
+        dropdown_bg: [1, 1, 1, 1]
+    MDLabel:
+        text: 'Name'
+        font_size: 20
+        halign: "left"
+        mode: "rectangle"
+        pos_hint: {"x": 0.1, 'y': 0.20}
+    MDTextFieldRect:
+        hint_text : "Igor"
+        size_hint: 0.7, None
+        height: "30dp"
+        pos_hint: {"x": 0.1, 'y': 0.61}
+    MDLabel:
+        text: 'Mail'
+        font_size: 20
+        halign: "left"
+        mode: "rectangle"
+        pos_hint: {"x": 0.1, 'y': 0.05}
+    MDTextFieldRect:
+        hint_text : "Igor@mail.ru"
+        size_hint: 0.7, None
+        height: "30dp"
+        pos_hint: {"x": 0.1, 'y': 0.46}
+    MDRaisedButton:
+        text: "Change password"
+        pos_hint: {"x": 0.1, 'y': 0.35}
+        md_bg_color: "grey"
+        size_hint: 0.6, None
+        on_press: root.manager.current = 'changepass'
+
+<ChangepassScreen>:
+    name: 'changepass'
+    MDIconButton:
+        icon: 'arrow-left'
+        icon_size: "45sp"
+        pos_hint: {"x": 0.001, 'y': 0.89}
+        on_press: root.manager.current = 'settings'
+    MDLabel:
+        text: 'Old password'
+        font_size: 20
+        halign: "left"
+        mode: "rectangle"
+        pos_hint: {"x": 0.1, 'y': 0.35}
+    MDTextFieldRect:
+        size_hint: 0.8, None
+        height: "30dp"
+        pos_hint: {"x": 0.1, 'y': 0.75}
+        password: True
+    MDLabel:
+        text: 'New password'
+        font_size: 20
+        halign: "left"
+        mode: "rectangle"
+        pos_hint: {"x": 0.1, 'y': 0.20}
+    MDTextFieldRect:
+        size_hint: 0.8, None
+        height: "30dp"
+        pos_hint: {"x": 0.1, 'y': 0.61}
+        password: True
+    MDLabel:
+        text: 'Confirm password'
+        font_size: 20
+        halign: "left"
+        mode: "rectangle"
+        pos_hint: {"x": 0.1, 'y': 0.05}
+    MDTextFieldRect:
+        size_hint: 0.8, None
+        height: "30dp"
+        pos_hint: {"x": 0.1, 'y': 0.46}
+        password: True
+    MDRaisedButton:
+        text: "Confirm"
+        pos_hint: {"x": 0.2, 'y': 0.35}
+        md_bg_color: "grey"
+        size_hint: 0.6, None
+
+<ViewCreateTestScreen>:
+    name: 'create_tests'
+    ScrollView:
+        MDList:
+            id: md_list
+            padding: 0
+            TwoLineRightIconListItem:
+                text: "Single-line item with icon"
+                secondary_text: "Secondary text here"
+                IconRightWidget:
+                    icon: "export-variant"
+                    pos_hint: {"x": 20, 'y': 0.2}
+                    icon_size: "15sp"
+                IconRightWidget:
+                    icon: "pencil"
+                    pos_hint: {"x": 0.7, 'y': 0.2}
+                    icon_size: "15sp"
+            TwoLineRightIconListItem:
+                text: "Single-line item with icon"
+                secondary_text: "Secondary text here"
+                IconRightWidget:
+                    icon: "export-variant"
+                    pos_hint: {"x": 20, 'y': 0.2}
+                    icon_size: "15sp"
+                IconRightWidget:
+                    icon: "pencil"
+                    pos_hint: {"x": 0.7, 'y': 0.2}
+                    icon_size: "15sp"
+            TwoLineRightIconListItem:
+                text: "Single-line item with icon"
+                secondary_text: "Secondary text here"
+                IconRightWidget:
+                    icon: "export-variant"
+                    pos_hint: {"x": 20, 'y': 0.2}
+                    icon_size: "15sp"
+                IconRightWidget:
+                    icon: "pencil"
+                    pos_hint: {"x": 0.7, 'y': 0.2}
+                    icon_size: "15sp"
+    MDBoxLayout:
+        adaptive_size: True
+        pos_hint: {'center_x':0.5,'center_y':0.1}
+        MDIconButton:
+            icon: "account"
+            on_press: root.manager.current = 'profile'
+        MDIconButton:
+            icon: "file-document"
+        MDIconButton:
+            icon: "folder"
+            disabled: True
+        MDIconButton:
+            icon: "account-plus"
+
