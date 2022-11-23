@@ -1,9 +1,38 @@
+<Check@MDCheckbox>:
+    group: 'group'
+    size_hint: None, None
+    size: dp(48), dp(48)
+
+<NotifyAddConfirm>
+    MDIconButton:
+        icon: "plus"
+        icon_size: "45sp"
+        pos_hint: {"x": 0.59, 'y': 0.89}
+    MDIconButton:
+        icon: "minus-thick"
+        icon_size: "45sp"
+        pos_hint: {"x": 0.79, 'y': 0.89}
+
+<ItemConfirm>
+    MDCheckbox:
+        size_hint: None, None
+        size: "48dp", "48dp"
+        pos_hint: {"x": 0.8, 'y': 0.15}
+
 ScreenManager:
     RegScreen:
     ProfileScreen:
     SettingScreen:
     ChangepassScreen:
     ViewCreateTestScreen:
+    AddTestScreen:
+    CreateQuestionScreen:
+    EditTestScreen:
+    EditQuestionScreen:
+    AccessTestScreen:
+    StartTestScreen:
+    PassTestScreen:
+    ShowUserScreen:
 
 <RegScreen>:
     name: 'reg'
@@ -118,11 +147,13 @@ ScreenManager:
             disabled: True
         MDIconButton:
             icon: "file-document"
+            on_press: root.manager.current = 'access_tests'
         MDIconButton:
             icon: "folder"
             on_press: root.manager.current = 'create_tests'
         MDIconButton:
             icon: "account-plus"
+            on_press: root.manager.current = 'show_user'
 
 
 <SettingScreen>:
@@ -219,39 +250,60 @@ ScreenManager:
         MDList:
             id: md_list
             padding: 0
-            TwoLineRightIconListItem:
-                text: "Single-line item with icon"
-                secondary_text: "Secondary text here"
+            TwoLineAvatarIconListItem:
+                text: "Theme test"
+                secondary_text: "Name test"
+                IconLeftWidget:
+                    icon: "delete"
+                    icon_size: "25sp"
                 IconRightWidget:
                     icon: "export-variant"
                     pos_hint: {"x": 20, 'y': 0.2}
                     icon_size: "15sp"
+                    on_press: root.show_share()
                 IconRightWidget:
                     icon: "pencil"
                     pos_hint: {"x": 0.7, 'y': 0.2}
                     icon_size: "15sp"
-            TwoLineRightIconListItem:
-                text: "Single-line item with icon"
-                secondary_text: "Secondary text here"
+                    on_press: root.manager.current = 'edit_test'
+            TwoLineAvatarIconListItem:
+                text: "Theme test"
+                secondary_text: "Name test"
+                IconLeftWidget:
+                    icon: "delete"
+                    icon_size: "25sp"
                 IconRightWidget:
                     icon: "export-variant"
                     pos_hint: {"x": 20, 'y': 0.2}
                     icon_size: "15sp"
+                    on_press: root.show_share()
                 IconRightWidget:
                     icon: "pencil"
                     pos_hint: {"x": 0.7, 'y': 0.2}
                     icon_size: "15sp"
-            TwoLineRightIconListItem:
-                text: "Single-line item with icon"
-                secondary_text: "Secondary text here"
+                    on_press: root.manager.current = 'edit_test'
+            TwoLineAvatarIconListItem:
+                text: "Theme test"
+                secondary_text: "Name test"
+                IconLeftWidget:
+                    icon: "delete"
+                    icon_size: "25sp"
                 IconRightWidget:
                     icon: "export-variant"
                     pos_hint: {"x": 20, 'y': 0.2}
                     icon_size: "15sp"
+                    on_press: root.show_share()
                 IconRightWidget:
                     icon: "pencil"
                     pos_hint: {"x": 0.7, 'y': 0.2}
                     icon_size: "15sp"
+                    on_press: root.manager.current = 'edit_test'
+
+    MDIconButton:
+        icon: "plus"
+        icon_size: "60sp"
+        pos_hint: {"x": 0.77, 'y': 0.12}
+        on_press: root.manager.current = 'add_test'
     MDBoxLayout:
         adaptive_size: True
         pos_hint: {'center_x':0.5,'center_y':0.1}
@@ -260,9 +312,540 @@ ScreenManager:
             on_press: root.manager.current = 'profile'
         MDIconButton:
             icon: "file-document"
+            on_press: root.manager.current = 'access_tests'
         MDIconButton:
             icon: "folder"
             disabled: True
         MDIconButton:
             icon: "account-plus"
+            on_press: root.manager.current = 'show_user'
+
+<AddTestScreen>:
+    name: 'add_test'
+    MDLabel:
+        text: 'Create test'
+        font_size: 25
+        halign: "left"
+        mode: "rectangle"
+        pos_hint: {"x": 0.1, 'y': 0.45}
+    MDLabel:
+        text: 'Name test'
+        font_size: 20
+        halign: "left"
+        mode: "rectangle"
+        pos_hint: {"x": 0.08, 'y': 0.35}
+    MDTextFieldRect:
+        size_hint: 0.8, None
+        height: "30dp"
+        pos_hint: {"x": 0.08, 'y': 0.75}
+    MDLabel:
+        text: 'Theme test'
+        font_size: 20
+        halign: "left"
+        mode: "rectangle"
+        pos_hint: {"x": 0.08, 'y': 0.20}
+    MDTextFieldRect:
+        size_hint: 0.8, None
+        height: "30dp"
+        pos_hint: {"x": 0.08, 'y': 0.61}
+    MDLabel:
+        text: 'Number of minutes'
+        font_size: 20
+        halign: "left"
+        mode: "rectangle"
+        pos_hint: {"x": 0.08, 'y': 0.05}
+    MDTextFieldRect:
+        size_hint: 0.8, None
+        height: "30dp"
+        pos_hint: {"x": 0.08, 'y': 0.46}
+    MDCheckbox:
+        size_hint: None, None
+        size: "48dp", "48dp"
+        pos_hint: {"x": 0.04, 'y': 0.36}
+    MDLabel:
+        text: 'Show answer after finish'
+        font_size: 15
+        pos_hint: {"x": 0.15, 'y': -0.1}
+    MDCheckbox:
+        size_hint: None, None
+        size: "48dp", "48dp"
+        pos_hint: {"x": 0.04, 'y': 0.30}
+    MDLabel:
+        text: 'Repeat test'
+        font_size: 15
+        pos_hint: {"x": 0.15, 'y': -0.16}
+    MDRaisedButton:
+        text: "Next"
+        pos_hint: {"x": 0.5, 'y': 0.08}
+        md_bg_color: "grey"
+        size_hint: 0.4, 0.07
+        on_press: root.manager.current = 'create_question'
+
+<CreateQuestionScreen>:
+    name: 'create_question'
+    MDLabel:
+        text: 'Create test'
+        font_size: 25
+        halign: "left"
+        mode: "rectangle"
+        pos_hint: {"x": 0.1, 'y': 0.45}
+    MDLabel:
+        text: 'Question'
+        font_size: 20
+        halign: "left"
+        mode: "rectangle"
+        pos_hint: {"x": 0.08, 'y': 0.35}
+    MDTextFieldRect:
+        size_hint: 0.8, None
+        height: "30dp"
+        pos_hint: {"x": 0.08, 'y': 0.75}
+    TwoLineAvatarIconListItem:
+        pos_hint: {"x": 0.08, 'y': 0.61}
+        MDTextFieldRect:
+            hint_text: "Enter answer"
+            size_hint: 0.6, None
+            height: "30dp"
+            pos_hint: {"x": 0.17, 'y': 0.2}
+        IconLeftWidget:
+            icon: "delete"
+            pos_hint: {"x": 0.17, 'y': -0.2}
+        IconRightWidget:
+            pos_hint: {"x": 0.17, 'y': -0.1}
+            MDCheckbox:
+                size_hint: None, None
+                size: "48dp", "48dp"
+
+    TwoLineAvatarIconListItem:
+        pos_hint: {"x": 0.08, 'y': 0.45}
+        MDTextFieldRect:
+            hint_text: "Enter answer"
+            size_hint: 0.6, None
+            height: "30dp"
+            pos_hint: {"x": 0.17, 'y': 0.2}
+        IconLeftWidget:
+            icon: "delete"
+            pos_hint: {"x": 0.17, 'y': -0.2}
+        IconRightWidget:
+            pos_hint: {"x": 0.17, 'y': -0.1}
+            MDCheckbox:
+                size_hint: None, None
+                size: "48dp", "48dp"
+    MDRaisedButton:
+        text: "Create question"
+        pos_hint: {"x": 0.1, 'y': 0.35}
+        md_bg_color: "grey"
+        size_hint: 0.4, 0.01
+
+    Check:
+        active: True
+        pos_hint: {"x": 0.06, 'y': 0.26}
+    MDLabel:
+        text: 'One answer'
+        font_size: 15
+        halign: "left"
+        mode: "rectangle"
+        pos_hint: {"x": 0.19, 'y': -0.2}
+    MDIconButton:
+        icon: "plus"
+        icon_size: "60sp"
+        pos_hint: {"x": 0.77, 'y': 0.15}
+    MDBoxLayout:
+        adaptive_size: True
+        pos_hint: {'center_x':0.5,'center_y':0.06}
+        MDRaisedButton:
+            text: "      Back       "
+            #pos_hint: {"x": 0.5, 'y': 0.08}
+            md_bg_color: "grey"
+            size_hint: 1, 1
+            on_press: root.manager.current = 'add_test'
+        MDRaisedButton:
+            text: "       Finish       "
+            #pos_hint: {"x": 0.5, 'y': 0.08}
+            md_bg_color: "grey"
+            size_hint: 1, 1
+            on_press: root.manager.current = 'create_tests'
+
+<EditTestScreen>:
+    name: 'edit_test'
+    MDLabel:
+        text: 'Edit test'
+        font_size: 25
+        halign: "left"
+        mode: "rectangle"
+        pos_hint: {"x": 0.1, 'y': 0.45}
+    MDLabel:
+        text: 'Name test'
+        font_size: 20
+        halign: "left"
+        mode: "rectangle"
+        pos_hint: {"x": 0.08, 'y': 0.35}
+    MDTextFieldRect:
+        size_hint: 0.8, None
+        height: "30dp"
+        pos_hint: {"x": 0.08, 'y': 0.75}
+    MDLabel:
+        text: 'Theme test'
+        font_size: 20
+        halign: "left"
+        mode: "rectangle"
+        pos_hint: {"x": 0.08, 'y': 0.20}
+    MDTextFieldRect:
+        size_hint: 0.8, None
+        height: "30dp"
+        pos_hint: {"x": 0.08, 'y': 0.61}
+    MDLabel:
+        text: 'Number of minutes'
+        font_size: 20
+        halign: "left"
+        mode: "rectangle"
+        pos_hint: {"x": 0.08, 'y': 0.05}
+    MDTextFieldRect:
+        size_hint: 0.8, None
+        height: "30dp"
+        pos_hint: {"x": 0.08, 'y': 0.46}
+    MDCheckbox:
+        size_hint: None, None
+        size: "48dp", "48dp"
+        pos_hint: {"x": 0.04, 'y': 0.36}
+    MDLabel:
+        text: 'Show answer after finish'
+        font_size: 15
+        pos_hint: {"x": 0.15, 'y': -0.1}
+    MDCheckbox:
+        size_hint: None, None
+        size: "48dp", "48dp"
+        pos_hint: {"x": 0.04, 'y': 0.30}
+    MDLabel:
+        text: 'Repeat test'
+        font_size: 15
+        pos_hint: {"x": 0.15, 'y': -0.16}
+    MDRaisedButton:
+        text: "Next"
+        pos_hint: {"x": 0.5, 'y': 0.08}
+        md_bg_color: "grey"
+        size_hint: 0.4, 0.07
+        on_press: root.manager.current = 'edit_question'
+
+<EditQuestionScreen>:
+    name: 'edit_question'
+    MDLabel:
+        text: 'Edit test'
+        font_size: 25
+        halign: "left"
+        mode: "rectangle"
+        pos_hint: {"x": 0.1, 'y': 0.45}
+    MDLabel:
+        text: 'Question'
+        font_size: 20
+        halign: "left"
+        mode: "rectangle"
+        pos_hint: {"x": 0.08, 'y': 0.35}
+    MDTextFieldRect:
+        size_hint: 0.8, None
+        height: "30dp"
+        pos_hint: {"x": 0.08, 'y': 0.75}
+    TwoLineAvatarIconListItem:
+        pos_hint: {"x": 0.08, 'y': 0.61}
+        MDTextFieldRect:
+            hint_text: "Enter answer"
+            size_hint: 0.6, None
+            height: "30dp"
+            pos_hint: {"x": 0.17, 'y': 0.2}
+        IconLeftWidget:
+            icon: "delete"
+            pos_hint: {"x": 0.17, 'y': -0.2}
+        IconRightWidget:
+            pos_hint: {"x": 0.17, 'y': -0.1}
+            MDCheckbox:
+                size_hint: None, None
+                size: "48dp", "48dp"
+
+    TwoLineAvatarIconListItem:
+        pos_hint: {"x": 0.08, 'y': 0.45}
+        MDTextFieldRect:
+            hint_text: "Enter answer"
+            size_hint: 0.6, None
+            height: "30dp"
+            pos_hint: {"x": 0.17, 'y': 0.2}
+        IconLeftWidget:
+            icon: "delete"
+            pos_hint: {"x": 0.17, 'y': -0.2}
+        IconRightWidget:
+            pos_hint: {"x": 0.17, 'y': -0.1}
+            MDCheckbox:
+                size_hint: None, None
+                size: "48dp", "48dp"
+    MDRaisedButton:
+        text: "Create question"
+        pos_hint: {"x": 0.1, 'y': 0.35}
+        md_bg_color: "grey"
+        size_hint: 0.4, 0.01
+
+    Check:
+        active: True
+        pos_hint: {"x": 0.06, 'y': 0.26}
+    MDLabel:
+        text: 'One answer'
+        font_size: 15
+        halign: "left"
+        mode: "rectangle"
+        pos_hint: {"x": 0.19, 'y': -0.2}
+    MDIconButton:
+        icon: "plus"
+        icon_size: "60sp"
+        pos_hint: {"x": 0.77, 'y': 0.15}
+    MDBoxLayout:
+        adaptive_size: True
+        pos_hint: {'center_x':0.5,'center_y':0.06}
+        MDRaisedButton:
+            text: "      Back       "
+            #pos_hint: {"x": 0.5, 'y': 0.08}
+            md_bg_color: "grey"
+            size_hint: 1, 1
+            on_press: root.manager.current = 'edit_test'
+        MDRaisedButton:
+            text: "       Finish       "
+            #pos_hint: {"x": 0.5, 'y': 0.08}
+            md_bg_color: "grey"
+            size_hint: 1, 1
+            on_press: root.manager.current = 'create_tests'
+
+<AccessTestScreen>:
+    name: 'access_tests'
+    ScrollView:
+        MDList:
+            id: md_list
+            padding: 0
+            TwoLineListItem:
+                text: "Theme test"
+                secondary_text: "Name test"
+                on_press: root.manager.current = 'start_test'
+            TwoLineListItem:
+                text: "Theme test"
+                secondary_text: "Name test"
+                on_press: root.manager.current = 'start_test'
+            TwoLineListItem:
+                text: "Theme test"
+                secondary_text: "Name test"
+                on_press: root.manager.current = 'start_test'
+    MDBoxLayout:
+        adaptive_size: True
+        pos_hint: {'center_x':0.5,'center_y':0.1}
+        MDIconButton:
+            icon: "account"
+            on_press: root.manager.current = 'profile'
+        MDIconButton:
+            icon: "file-document"
+            disabled: True
+        MDIconButton:
+            icon: "folder"
+            on_press: root.manager.current = 'create_tests'
+        MDIconButton:
+            icon: "account-plus"
+            on_press: root.manager.current = 'show_user'
+
+<StartTestScreen>:
+    name: 'start_test'
+
+    MDScreen :
+        md_bg_color : [255/255,255/255,255/255,1]
+        MDCard :
+            size_hint : None,None
+            size : 320, 350
+            pos_hint : {"center_x":.5,"center_y":.6}
+            elevation : 3
+            md_bg_color : [255/255,255/255,255/255,1]
+            padding : 15
+            spacing : 15
+            orientation : "vertical"
+            MDLabel :
+                text : 'Name test'
+                font_size : 25
+                halign : "left"
+                size_hint_y : None
+                mode: "rectangle"
+                height : self.texture_size[1]
+                padding_y : 5
+            MDLabel :
+                text : 'Theme: test theme'
+                font_size : 20
+                halign : "left"
+                size_hint_y : None
+                mode: "rectangle"
+                height : self.texture_size[1]
+                padding_y : 5
+            MDLabel :
+                text : 'Name author: author name'
+                font_size : 20
+                halign : "left"
+                size_hint_y : None
+                mode: "rectangle"
+                height : self.texture_size[1]
+                padding_y : 5
+            MDLabel :
+                text : 'Number of questions: num'
+                font_size : 20
+                halign : "left"
+                size_hint_y : None
+                mode: "rectangle"
+                height : self.texture_size[1]
+                padding_y : 5
+            MDLabel :
+                text : 'Time limit: num'
+                font_size : 20
+                halign : "left"
+                size_hint_y : None
+                mode: "rectangle"
+                height : self.texture_size[1]
+                padding_y : 5
+            MDBoxLayout:
+                adaptive_size: True
+                pos_hint: {'center_x':0.5,'center_y':0.06}
+                MDRaisedButton:
+                    text: "      Cancel       "
+                    #pos_hint: {"x": 0.5, 'y': 0.08}
+                    md_bg_color: "grey"
+                    size_hint: 1, 1
+                    on_press: root.manager.current = 'access_tests'
+                MDRaisedButton:
+                    text: "       Start       "
+                    #pos_hint: {"x": 0.5, 'y': 0.08}
+                    md_bg_color: "grey"
+                    size_hint: 1, 1
+                    on_press: root.manager.current = 'pass_test'
+    MDBoxLayout:
+        adaptive_size: True
+        pos_hint: {'center_x':0.5,'center_y':0.1}
+        MDIconButton:
+            icon: "account"
+            on_press: root.manager.current = 'profile'
+        MDIconButton:
+            icon: "file-document"
+            disabled: True
+        MDIconButton:
+            icon: "folder"
+            on_press: root.manager.current = 'create_tests'
+        MDIconButton:
+            icon: "account-plus"
+            on_press: root.manager.current = 'show_user'
+    MDIconButton:
+        icon: "abacus"
+        icon_size: "30sp"
+        pos_hint: {"x": 0.8, 'y': 0.75}
+        on_press: root.show_statistics()
+
+<PassTestScreen>:
+    name: 'pass_test'
+    MDScreen :
+        md_bg_color : [255/255,255/255,255/255,1]
+        MDCard :
+            size_hint : None,None
+            size : 320, 400
+            pos_hint : {"center_x":.5,"center_y":.6}
+            elevation : 3
+            md_bg_color : [255/255,255/255,255/255,1]
+            padding : 2
+            spacing : 1
+            orientation : "vertical"
+            MDLabel :
+                text : 'Question 8'
+                font_size : 25
+                halign : "left"
+                size_hint_y : None
+                mode: "rectangle"
+                height : self.texture_size[1]
+                padding_y : 1
+            MDLabel :
+                text : 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+                font_size : 20
+                halign : "left"
+                size_hint_y : None
+                mode: "rectangle"
+                height : self.texture_size[1]
+                padding_y : 1
+            MDCheckbox:
+                size_hint: None, None
+                size: "48dp", "48dp"
+                pos_hint: {"x": 0.04, 'y': 0.36}
+            MDCheckbox:
+                size_hint: None, None
+                size: "48dp", "48dp"
+                pos_hint: {"x": 0.04, 'y': 0.36}
+            MDCheckbox:
+                size_hint: None, None
+                size: "48dp", "48dp"
+                pos_hint: {"x": 0.04, 'y': 0.36}
+            MDCheckbox:
+                size_hint: None, None
+                size: "48dp", "48dp"
+                pos_hint: {"x": 0.04, 'y': 0.36}
+    MDLabel:
+        text: 'Answer 1'
+        font_size: 15
+        pos_hint: {"x": 0.20, 'y': 0.055}
+    MDLabel:
+        text: 'Answer 2'
+        font_size: 15
+        pos_hint: {"x": 0.20, 'y': -0.026}
+    MDLabel:
+        text: 'Answer 3'
+        font_size: 15
+        pos_hint: {"x": 0.20, 'y': -0.11}
+    MDLabel:
+        text: 'Answer 4'
+        font_size: 15
+        pos_hint: {"x": 0.20, 'y':-0.19}
+
+<ShowUserScreen>:
+    name: 'show_user'
+    MDTextField:
+        hint_text: "Search user"
+        mode: "rectangle"
+        icon_right: "magnify"
+        pos_hint: {'center_x': 0.5,'center_y': 0.95}
+        size_hint: 0.9, 0.08
+    ScrollView:
+        pos_hint: {'center_x': 0.5,'center_y': 0.4}
+        MDList:
+            id: md_list
+            padding: 0
+            TwoLineIconListItem:
+                text: "Two-line item with avatar"
+                secondary_text: "Secondary text here"
+                IconLeftWidget:
+                    icon: "delete"
+                    icon_size: "25sp"
+            TwoLineIconListItem:
+                text: "Two-line item with avatar"
+                secondary_text: "Secondary text here"
+                IconLeftWidget:
+                    icon: "delete"
+                    icon_size: "25sp"
+            TwoLineIconListItem:
+                text: "Two-line item with avatar"
+                secondary_text: "Secondary text here"
+                IconLeftWidget:
+                    icon: "delete"
+                    icon_size: "25sp"
+    MDIconButton:
+        icon: "bell-ring"
+        icon_size: "35sp"
+        pos_hint: {"x": 0.05, 'y': 0.13}
+        on_press: root.manager.current = root.show_confirmation_dialog()
+    MDBoxLayout:
+        adaptive_size: True
+        pos_hint: {'center_x':0.5,'center_y':0.1}
+        MDIconButton:
+            icon: "account"
+            on_press: root.manager.current = 'profile'
+        MDIconButton:
+            icon: "file-document"
+            on_press: root.manager.current = 'access_tests'
+        MDIconButton:
+            icon: "folder"
+            on_press: root.manager.current = 'create_tests'
+        MDIconButton:
+            icon: "account-plus"
+            disabled: True
+
 
